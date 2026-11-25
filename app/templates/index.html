@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+</head>
+<body>
+
+    <h1>My Task Management Application</h1>
+
+    <h2>Add New Task</h2>
+
+    <form action="/add" method="POST">
+        <input type="text" name="title"
+               placeholder="Enter your task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>My Tasks</h2>
+
+    {% for task in tasks %}
+
+        <p>
+            {{ task['title'] }}
+
+            {% if task['completed'] %}
+                - Completed
+            {% else %}
+                <a href="/complete/{{ task['id'] }}">
+                    Complete
+                </a>
+            {% endif %}
+
+            <a href="/edit/{{ task['id'] }}">Edit</a>
+
+            <a href="/delete/{{ task['id'] }}">Delete</a>
+        </p>
+
+    {% else %}
+
+        <p>No tasks available.</p>
+
+    {% endfor %}
+
+</body>
+</html>
